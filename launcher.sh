@@ -10,4 +10,19 @@ for file in "$@"; do
     fi
 done
 
-"$DIR/.venv/bin/python3" "$DIR/csv_to_sheets.py" "$@"
+for file in "$@"; do
+    ext="${file##*.}"
+    ext="$(printf '%s' "$ext" | tr '[:upper:]' '[:lower:]')"
+    case "$ext" in
+        csv)
+            "$DIR/.venv/bin/python3" "$DIR/csv_to_sheets.py" "$file"
+            ;;
+        xlsx|xls)
+            "$DIR/.venv/bin/python3" "$DIR/xlsx_to_sheets.py" "$file"
+            ;;
+        *)
+            echo "Unsupported file type: .$ext (expected .csv, .xlsx, or .xls)" >&2
+            exit 1
+            ;;
+    esac
+done

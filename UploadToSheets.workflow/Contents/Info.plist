@@ -28,6 +28,8 @@
 			<key>NSSendFileTypes</key>
 			<array>
 				<string>public.comma-separated-values-text</string>
+				<string>org.openxmlformats.spreadsheetml.sheet</string>
+				<string>com.microsoft.excel.xls</string>
 				<string>public.plain-text</string>
 			</array>
 		</dict>

@@ -54,7 +54,7 @@
 					<string>on run {input, parameters}
 	repeat with f in input
 		set filePath to POSIX path of f
-		do shell script "/Users/renebravo/Python/csv_to_drive/launcher.sh " &amp; quoted form of filePath
+		do shell script "/Users/renebravo/Python/files_to_gsheet/launcher.sh " &amp; quoted form of filePath
 	end repeat
 end run</string>
 				</dict>

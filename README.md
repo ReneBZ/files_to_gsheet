@@ -15,7 +15,7 @@ Works the same on every Mac: **double-click** a CSV, or **right-click → Upload
 Clone or pull this repo, then run the installer:
 
 ```bash
-cd /Users/renebravo/Python/csv_to_drive
+cd /Users/renebravo/Python/files_to_gsheet
 ./install.sh
 ```
 
