@@ -64,6 +64,17 @@ Per-machine (not in git): `.venv/`, `credentials.json`, `token.pickle`, `~/Appli
 
 ## Troubleshooting
 
+**`RefreshError: invalid_grant` / Automator "Run Shell Script" error**  
+The saved Google login (`token.pickle`) was revoked or expired. Re-authenticate from a terminal:
+
+```bash
+./launcher.sh test.csv
+```
+
+Sign in in the browser that opens. After that, double-clicking a CSV works again.
+
+If this keeps happening after about a week, the Google Cloud OAuth app is likely still in **Testing**. In [Google Cloud Console](https://console.cloud.google.com/) → APIs & Services → OAuth consent screen, set the publishing status to **In production** (or re-auth when the token expires). Testing-mode refresh tokens expire after 7 days.
+
 **Downloaded CSV blocked by macOS ("cannot verify malware")**  
 Use **Right-click → Upload to Sheets** instead of double-click.
 

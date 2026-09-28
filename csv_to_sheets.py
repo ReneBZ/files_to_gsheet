@@ -2,6 +2,7 @@ import os
 import sys
 import pickle
 import webbrowser
+from google.auth.exceptions import RefreshError
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
@@ -27,17 +28,21 @@ def get_credentials():
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
+            try:
+                creds.refresh(Request())
+            except RefreshError:
+                creds = None
+
+        if not creds or not creds.valid:
             if not os.path.exists(creds_path):
                 print(f"Error: credentials.json not found at {creds_path}")
                 print("Please download it from Google Cloud Console.")
                 sys.exit(1)
-                
+
             flow = InstalledAppFlow.from_client_secrets_file(
                 creds_path, SCOPES)
             creds = flow.run_local_server(port=0)
-        
+
         # Save the credentials for the next run
         with open(token_path, 'wb') as token:
             pickle.dump(creds, token)
